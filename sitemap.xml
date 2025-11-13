@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://example.com/</loc>
+    <loc>https://fromalania.github.io/market/</loc>
   </url>
   <url>
-    <loc>https://example.com/catalog.html</loc>
+    <loc>https://fromalania.github.io/market/catalog.html</loc>
   </url>
   <url>
-    <loc>https://example.com/product.html</loc>
+    <loc>https://fromalania.github.io/market/product.html</loc>
   </url>
   <url>
-    <loc>https://example.com/cart.html</loc>
+    <loc>https://fromalania.github.io/market/cart.html</loc>
   </url>
   <url>
-    <loc>https://example.com/checkout.html</loc>
+    <loc>https://fromalania.github.io/market/checkout.html</loc>
   </url>
   <url>
-    <loc>https://example.com/thankyou.html</loc>
+    <loc>https://fromalania.github.io/market/thankyou.html</loc>
   </url>
   <url>
-    <loc>https://example.com/privacy.html</loc>
+    <loc>https://fromalania.github.io/market/privacy.html</loc>
   </url>
 </urlset>
