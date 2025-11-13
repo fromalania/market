@@ -4,92 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Оформление заказа — Эко-Маркет</title>
-    <meta name="description" content="Пример процесса оформления заказа для анализа UX.">
+    <meta name="description" content="Упрощённая форма оформления заказа в учебном интернет-магазине Эко-Маркет. Пример интерфейса для практики по юзабилити.">
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DZ76B7M8G3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DZ76B7M8G3');
+    </script>
 </head>
 <body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <a href="index.html" class="logo">Эко-Маркет</a>
-            <nav class="main-nav">
-                <a href="index.html" class="nav-link">Главная</a>
-                <a href="catalog.html" class="nav-link">Каталог</a>
-                <a href="cart.html" class="nav-link">Корзина</a>
-                <a href="index.html#contacts" class="nav-link">Контакты</a>
-            </nav>
-            <a href="cart.html" class="cart-link">Корзина <span class="cart-count" id="cart-count">0</span></a>
-        </div>
-    </header>
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">Эко-Маркет</a>
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link">Главная</a>
+            <a href="catalog.html" class="nav-link">Каталог</a>
+            <a href="cart.html" class="nav-link">Корзина</a>
+            <a href="index.html#contacts" class="nav-link">Контакты</a>
+        </nav>
+        <a href="cart.html" class="cart-link">Корзина <span class="cart-count" id="cart-count">0</span></a>
+    </div>
+</header>
 
-    <main>
-        <section class="page-header">
-            <div class="container">
-                <h1>Оформление заказа</h1>
-                <p>Форма немного усложнена специально для практики по юзабилити (чтобы было что улучшать).</p>
+<main>
+    <section class="page-header">
+        <div class="container">
+            <h1>Оформление заказа</h1>
+            <p>Заполните основные данные — это займёт не больше пары минут.</p>
+            <div class="checkout-steps">
+                <div class="checkout-step checkout-step_active">1. Данные</div>
+                <div class="checkout-step">2. Подтверждение</div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="checkout-section">
-            <div class="container checkout-inner">
-                <form class="checkout-form" id="checkout-form">
-                    <h2>Контактные данные</h2>
+    <section class="checkout-section">
+        <div class="container checkout-grid">
+            <form id="checkout-form" class="checkout-form">
+                <h2>1. Контактные данные</h2>
+                <div class="form-row">
                     <label>
-                        Имя и фамилия *
-                        <input type="text" name="fullname" required>
+                        Имя и фамилия*
+                        <input type="text" name="name" required placeholder="Ваше имя">
+                    </label>
+                </div>
+                <div class="form-row form-row-2cols">
+                    <label>
+                        Телефон*
+                        <input type="tel" name="phone" required placeholder="+7 ХХХ ХХХ-ХХ-ХХ">
                     </label>
                     <label>
-                        Email *
-                        <input type="email" name="email" required>
+                        Email
+                        <input type="email" name="email" placeholder="you@example.com">
                     </label>
-                    <label>
-                        Телефон *
-                        <input type="tel" name="phone" required>
-                    </label>
+                </div>
 
-                    <h2>Адрес доставки</h2>
+                <h2>2. Адрес доставки</h2>
+                <div class="form-row form-row-2cols">
                     <label>
-                        Город *
-                        <input type="text" name="city" required>
-                    </label>
-                    <label>
-                        Улица, дом, квартира *
-                        <input type="text" name="address" required>
+                        Город*
+                        <input type="text" name="city" required placeholder="Например, Москва">
                     </label>
                     <label>
                         Индекс
-                        <input type="text" name="zip">
+                        <input type="text" name="zip" placeholder="Индекс (по желанию)">
                     </label>
+                </div>
+                <div class="form-row form-row-2cols">
+                    <label>
+                        Улица*
+                        <input type="text" name="street" required placeholder="Название улицы">
+                    </label>
+                    <label>
+                        Дом / квартира*
+                        <input type="text" name="house" required placeholder="Дом, квартира/офис">
+                    </label>
+                </div>
 
-                    <h2>Дополнительно</h2>
+                <div class="form-row">
                     <label>
                         Комментарий к заказу
-                        <textarea name="comment" rows="3"></textarea>
+                        <textarea name="comment" rows="3" placeholder="Например: позвонить за час до доставки."></textarea>
                     </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="newsletter">
-                        Хочу получать новости и спецпредложения (пример доп. чекбокса)
-                    </label>
+                </div>
 
-                    <button type="submit" class="btn primary-btn">Подтвердить заказ</button>
-                    <p class="form-status" id="checkout-status"></p>
-                </form>
+                <p class="form-hint">Поля со звёздочкой (*) обязательны для заполнения.</p>
 
-                <aside class="checkout-summary">
-                    <h2>Ваш заказ</h2>
-                    <div id="checkout-items"></div>
-                    <p class="checkout-total">Итого: <span id="checkout-total">0 ₽</span></p>
-                </aside>
-            </div>
-        </section>
-    </main>
+                <p id="checkout-status" class="form-status"></p>
 
-    <footer class="site-footer">
-        <div class="container footer-inner">
-            <p>© Эко-Маркет, 2025. Учебный проект.</p>
-            <a href="privacy.html" class="footer-link">Политика конфиденциальности</a>
+                <button type="submit" class="btn primary-btn">
+                    Подтвердить заказ
+                </button>
+                <p class="form-secondary-link">
+                    Или <a href="cart.html">вернуться в корзину</a>, чтобы изменить состав заказа.
+                </p>
+            </form>
+
+            <aside class="checkout-summary">
+                <h2>Ваш заказ</h2>
+                <div id="checkout-items" class="checkout-items">
+                    <!-- Состав заказа подставляется скриптом -->
+                </div>
+                <p class="checkout-total">
+                    Итого: <span id="checkout-total">0 ₽</span>
+                </p>
+                <p class="checkout-note">
+                    Состав заказа можно отредактировать на странице корзины.
+                </p>
+                <a href="cart.html" class="btn secondary-btn">Открыть корзину</a>
+            </aside>
         </div>
-    </footer>
+    </section>
+</main>
 
-    <script src="script.js"></script>
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <p>© Эко-Маркет, 2025. Учебный проект.</p>
+        <a href="privacy.html" class="footer-link">Политика конфиденциальности</a>
+    </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
