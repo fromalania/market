@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+
+# В реальном продакшене здесь можно закрыть служебные разделы, например /admin
+Sitemap: https://example.com/sitemap.xml
