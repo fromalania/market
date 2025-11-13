@@ -4,17 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Страница не найдена — Эко-Маркет</title>
-    <meta name="description" content="Страница не найдена. Вернитесь в каталог экологичных товаров.">
+    <meta name="description" content="Учебная 404-страница Эко-Маркет. Страница не найдена, но можно вернуться в каталог товаров.">
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DZ76B7M8G3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DZ76B7M8G3');
+    </script>
 </head>
-<body>
-    <main class="not-found-page">
+<body class="not-found-body">
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">Эко-Маркет</a>
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link">Главная</a>
+            <a href="catalog.html" class="nav-link">Каталог</a>
+            <a href="cart.html" class="nav-link">Корзина</a>
+            <a href="index.html#contacts" class="nav-link">Контакты</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="not-found-section">
         <div class="container not-found-inner">
-            <h1>404</h1>
-            <p>Такой страницы нет. Возможно, товар переехал или был удалён.</p>
-            <a href="index.html" class="btn primary-btn">Вернуться на главную</a>
-            <a href="catalog.html" class="btn secondary-btn">Перейти в каталог</a>
+            <div class="not-found-text">
+                <p class="not-found-code">404</p>
+                <h1>Страница не найдена</h1>
+                <p class="not-found-lead">
+                    Возможно, ссылка устарела или была введена с ошибкой. 
+                    Зато каталог с учебными эко-товарами никуда не делся.
+                </p>
+                <a href="catalog.html" class="btn primary-btn">
+                    Вернуться в каталог
+                </a>
+                <p class="not-found-secondary">
+                    Или можно открыть <a href="index.html">главную страницу</a>.
+                </p>
+            </div>
+            <div class="not-found-illustration">
+                Здесь может быть иллюстрация 404 (заглушка для практики).
+            </div>
         </div>
-    </main>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <p>© Эко-Маркет, 2025. Учебный проект.</p>
+        <a href="privacy.html" class="footer-link">Политика конфиденциальности</a>
+    </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
