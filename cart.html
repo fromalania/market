@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина — Эко-Маркет</title>
+    <meta name="description" content="Учебная страница корзины для тренировки анализа поведения пользователей.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">Эко-Маркет</a>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="catalog.html" class="nav-link">Каталог</a>
+                <a href="cart.html" class="nav-link active">Корзина</a>
+                <a href="index.html#contacts" class="nav-link">Контакты</a>
+            </nav>
+            <a href="cart.html" class="cart-link">Корзина <span class="cart-count" id="cart-count">0</span></a>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Корзина</h1>
+                <p>Здесь собраны товары, которые вы добавили. Страница упрощена для учебных сценариев.</p>
+            </div>
+        </section>
+
+        <section class="cart-section">
+            <div class="container">
+                <div id="cart-items" class="cart-items">
+                    <!-- Товары будут подставляться через JS -->
+                </div>
+                <div class="cart-summary">
+                    <p>Итого: <span id="cart-total">0 ₽</span></p>
+                    <a href="checkout.html" class="btn primary-btn">Перейти к оформлению</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>© Эко-Маркет, 2025. Учебный проект.</p>
+            <a href="privacy.html" class="footer-link">Политика конфиденциальности</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

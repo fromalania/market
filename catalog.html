@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог — Эко-Маркет</title>
+    <meta name="description" content="Каталог экологичных товаров: многоразовые бутылки, шопперы, эко-товары для дома.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">Эко-Маркет</a>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="catalog.html" class="nav-link active">Каталог</a>
+                <a href="cart.html" class="nav-link">Корзина</a>
+                <a href="index.html#contacts" class="nav-link">Контакты</a>
+            </nav>
+            <a href="cart.html" class="cart-link">Корзина <span class="cart-count" id="cart-count">0</span></a>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Каталог товаров</h1>
+                <p>Небольшой учебный каталог. Здесь несколько примеров товаров, на которых можно тренироваться в анализе UX и SEO.</p>
+            </div>
+        </section>
+
+        <section class="filters">
+            <div class="container filters-inner">
+                <div class="filters-block">
+                    <span class="filters-title">Фильтры (учебный пример)</span>
+                    <select id="category-filter">
+                        <option value="all">Все категории</option>
+                        <option value="bottles">Бутылки</option>
+                        <option value="bags">Шопперы</option>
+                        <option value="home">Для дома</option>
+                    </select>
+                </div>
+                <div class="filters-block">
+                    <input type="search" id="search-input" placeholder="Поиск по товарам...">
+                </div>
+            </div>
+        </section>
+
+        <section class="catalog-section">
+            <div class="container">
+                <div class="product-grid" id="product-grid">
+                    <article class="product-card" data-category="bottles" id="bottles">
+                        <h2 class="product-title">Многоразовая бутылка «Forest» 500 мл</h2>
+                        <p class="product-price">990 ₽</p>
+                        <p class="product-desc">Лёгкая стальная бутылка с матовым покрытием. Подходит для воды и других напитков.</p>
+                        <a href="product.html?id=bottle" class="product-link">Подробнее</a>
+                        <button class="btn small-btn add-to-cart" data-product="bottle">В корзину</button>
+                    </article>
+                    <article class="product-card" data-category="bags" id="bags">
+                        <h2 class="product-title">Хлопковый шоппер «Leaf»</h2>
+                        <p class="product-price">590 ₽</p>
+                        <p class="product-desc">Плотный шоппер из органического хлопка. Выдерживает до 10 кг.</p>
+                        <a href="product.html?id=shopper" class="product-link">Подробнее</a>
+                        <button class="btn small-btn add-to-cart" data-product="shopper">В корзину</button>
+                    </article>
+                    <article class="product-card" data-category="home" id="home">
+                        <h2 class="product-title">Набор многоразовых контейнеров</h2>
+                        <p class="product-price">1490 ₽</p>
+                        <p class="product-desc">Три контейнера разных размеров для хранения продуктов и обедов на каждый день.</p>
+                        <a href="product.html?id=containers" class="product-link">Подробнее</a>
+                        <button class="btn small-btn add-to-cart" data-product="containers">В корзину</button>
+                    </article>
+                </div>
+                <p class="filters-hint">Фильтры и поиск носят учебный характер и работают только на этой странице.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>© Эко-Маркет, 2025. Учебный проект.</p>
+            <a href="privacy.html" class="footer-link">Политика конфиденциальности</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

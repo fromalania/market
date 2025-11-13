@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа — Эко-Маркет</title>
+    <meta name="description" content="Пример процесса оформления заказа для анализа UX.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">Эко-Маркет</a>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="catalog.html" class="nav-link">Каталог</a>
+                <a href="cart.html" class="nav-link">Корзина</a>
+                <a href="index.html#contacts" class="nav-link">Контакты</a>
+            </nav>
+            <a href="cart.html" class="cart-link">Корзина <span class="cart-count" id="cart-count">0</span></a>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Оформление заказа</h1>
+                <p>Форма немного усложнена специально для практики по юзабилити (чтобы было что улучшать).</p>
+            </div>
+        </section>
+
+        <section class="checkout-section">
+            <div class="container checkout-inner">
+                <form class="checkout-form" id="checkout-form">
+                    <h2>Контактные данные</h2>
+                    <label>
+                        Имя и фамилия *
+                        <input type="text" name="fullname" required>
+                    </label>
+                    <label>
+                        Email *
+                        <input type="email" name="email" required>
+                    </label>
+                    <label>
+                        Телефон *
+                        <input type="tel" name="phone" required>
+                    </label>
+
+                    <h2>Адрес доставки</h2>
+                    <label>
+                        Город *
+                        <input type="text" name="city" required>
+                    </label>
+                    <label>
+                        Улица, дом, квартира *
+                        <input type="text" name="address" required>
+                    </label>
+                    <label>
+                        Индекс
+                        <input type="text" name="zip">
+                    </label>
+
+                    <h2>Дополнительно</h2>
+                    <label>
+                        Комментарий к заказу
+                        <textarea name="comment" rows="3"></textarea>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="newsletter">
+                        Хочу получать новости и спецпредложения (пример доп. чекбокса)
+                    </label>
+
+                    <button type="submit" class="btn primary-btn">Подтвердить заказ</button>
+                    <p class="form-status" id="checkout-status"></p>
+                </form>
+
+                <aside class="checkout-summary">
+                    <h2>Ваш заказ</h2>
+                    <div id="checkout-items"></div>
+                    <p class="checkout-total">Итого: <span id="checkout-total">0 ₽</span></p>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>© Эко-Маркет, 2025. Учебный проект.</p>
+            <a href="privacy.html" class="footer-link">Политика конфиденциальности</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
