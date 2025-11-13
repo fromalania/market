@@ -4,116 +4,129 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Эко-Маркет — Магазин экологичных товаров</title>
-    <meta name="description" content="Эко-Маркет — интернет-магазин экологичных товаров для дома и заботы о себе. Многоразовые бутылки, шопперы, эко-упаковка.">
+    <meta name="description" content="Эко-Маркет — учебный интернет-магазин экологичных товаров для практики по SEO и юзабилити.">
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DZT6B7M8G3');
+    </script>
 </head>
 <body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <a href="index.html" class="logo">Эко-Маркет</a>
-            <nav class="main-nav">
-                <a href="index.html" class="nav-link active">Главная</a>
-                <a href="catalog.html" class="nav-link">Каталог</a>
-                <a href="cart.html" class="nav-link">Корзина</a>
-                <a href="#contacts" class="nav-link">Контакты</a>
-            </nav>
-            <a href="cart.html" class="cart-link">Корзина <span class="cart-count" id="cart-count">0</span></a>
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">Эко-Маркет</a>
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link active">Главная</a>
+            <a href="catalog.html" class="nav-link">Каталог</a>
+            <a href="cart.html" class="nav-link">Корзина</a>
+            <a href="#contacts" class="nav-link">Контакты</a>
+        </nav>
+        <a href="cart.html" class="cart-link">Корзина <span class="cart-count" id="cart-count">0</span></a>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container hero-inner">
+            <div class="hero-text">
+                <h1>Экологичные товары для осознанной жизни</h1>
+                <p>Учебный интернет-магазин, на котором можно тренироваться анализировать SEO, юзабилити и техническую оптимизацию сайта.</p>
+                <a href="catalog.html" class="btn primary-btn">Перейти в каталог</a>
+            </div>
+            <div class="hero-image">
+                <div class="hero-placeholder">
+                    Здесь может быть ваше промо-изображение.<br>
+                    Сейчас это просто заглушка для практики.
+                </div>
+            </div>
         </div>
-    </header>
+    </section>
 
-    <main>
-        <section class="hero">
-            <div class="container hero-inner">
-                <div class="hero-text">
-                    <h1>Экологичные товары для осознанной жизни</h1>
-                    <p>Собрали в одном месте товары, которые помогают заботиться о планете и о себе: многоразовые бутылки, шопперы, эко-упаковка и другие полезные вещи.</p>
-                    <a href="catalog.html" class="btn primary-btn">Перейти в каталог</a>
-                </div>
-                <div class="hero-image">
-                    <div class="hero-placeholder">Здесь может быть ваше промо-изображение</div>
-                </div>
+    <section class="features">
+        <div class="container">
+            <h2>Что есть на сайте</h2>
+            <div class="features-grid">
+                <article class="feature-card">
+                    <h3>Каталог с товарами</h3>
+                    <p>Несколько тестовых товаров с описанием, ценой и кнопкой «В корзину» — удобно для анализа карточек.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Корзина и оформление</h3>
+                    <p>Простая корзина и форма оформления заказа, которые можно улучшать с точки зрения юзабилити.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>SEO-заготовки</h3>
+                    <p>Файлы robots.txt и sitemap.xml, meta-теги, 404-страница — всё, что нужно для практики по SEO.</p>
+                </article>
             </div>
-        </section>
-
-        <section class="features">
-            <div class="container">
-                <h2>Почему выбирают нас</h2>
-                <div class="features-grid">
-                    <article class="feature-card">
-                        <h3>Экологичные материалы</h3>
-                        <p>Мы внимательно отбираем товары и стараемся, чтобы они были многоразовыми, перерабатываемыми или из переработанного сырья.</p>
-                    </article>
-                    <article class="feature-card">
-                        <h3>Честный подход</h3>
-                        <p>Подробно описываем состав, происхождение материалов и условия использования, чтобы вы принимали осознанные решения.</p>
-                    </article>
-                    <article class="feature-card">
-                        <h3>Удобная доставка</h3>
-                        <p>Доставляем по всей России удобными вам службами. Есть варианты бесконтактной доставки и пунктов выдачи.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-light">
-            <div class="container">
-                <h2>Популярные категории</h2>
-                <div class="category-grid">
-                    <a href="catalog.html#bottles" class="category-card">
-                        <h3>Многоразовые бутылки</h3>
-                        <p>Для воды, кофе и других напитков.</p>
-                    </a>
-                    <a href="catalog.html#bags" class="category-card">
-                        <h3>Шопперы и сумки</h3>
-                        <p>Чтобы отказаться от одноразовых пакетов.</p>
-                    </a>
-                    <a href="catalog.html#home" class="category-card">
-                        <h3>Для дома</h3>
-                        <p>Эко-средства для уборки и хранения.</p>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-accent" id="contacts">
-            <div class="container contacts-inner">
-                <div>
-                    <h2>Контакты</h2>
-                    <p>Есть вопросы по заказу или товарам? Напишите нам — ответим и поможем подобрать решение.</p>
-                    <ul class="contacts-list">
-                        <li>Email: <a href="mailto:info@eco-market.local">info@eco-market.local</a></li>
-                        <li>Telegram: @eco_market_help</li>
-                        <li>Время работы: ежедневно с 10:00 до 20:00 (МСК)</li>
-                    </ul>
-                </div>
-                <form class="feedback-form" id="feedback-form">
-                    <h3>Форма обратной связи</h3>
-                    <label>
-                        Имя
-                        <input type="text" name="name" placeholder="Ваше имя">
-                    </label>
-                    <label>
-                        Email
-                        <input type="email" name="email" placeholder="you@example.com">
-                    </label>
-                    <label>
-                        Сообщение
-                        <textarea name="message" rows="4" placeholder="Опишите ваш вопрос"></textarea>
-                    </label>
-                    <button type="submit" class="btn secondary-btn">Отправить</button>
-                    <p class="form-status" id="form-status"></p>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container footer-inner">
-            <p>© Эко-Маркет, 2025. Учебный проект.</p>
-            <a href="privacy.html" class="footer-link">Политика конфиденциальности</a>
         </div>
-    </footer>
+    </section>
 
-    <script src="script.js"></script>
+    <section class="section-light">
+        <div class="container">
+            <h2>Популярные категории</h2>
+            <div class="category-grid">
+                <a href="catalog.html#bottles" class="category-card">
+                    <h3>Многоразовые бутылки</h3>
+                    <p>Учебный пример товаров для воды.</p>
+                </a>
+                <a href="catalog.html#bags" class="category-card">
+                    <h3>Шопперы и сумки</h3>
+                    <p>Пример товаров, заменяющих пакеты.</p>
+                </a>
+                <a href="catalog.html#home" class="category-card">
+                    <h3>Для дома</h3>
+                    <p>Товары для практики описаний и блоков.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-accent" id="contacts">
+        <div class="container contacts-inner">
+            <div>
+                <h2>Контакты</h2>
+                <p>Здесь учебный раздел контактов. Можно тренироваться оформлять блок доверия и коммуникации.</p>
+                <ul class="contacts-list">
+                    <li>Email: <a href="mailto:info@eco-market.local">info@eco-market.local</a></li>
+<li>Telegram: @eco_market_help</li>
+                    <li>Время работы: ежедневно с 10:00 до 20:00 (МСК)</li>
+                </ul>
+            </div>
+            <form class="feedback-form" id="feedback-form">
+                <h3>Форма обратной связи</h3>
+                <label>
+                    Имя
+                    <input type="text" name="name" placeholder="Ваше имя">
+                </label>
+                <label>
+                    Email
+                    <input type="email" name="email" placeholder="you@example.com">
+                </label>
+                <label>
+                    Сообщение
+                    <textarea name="message" rows="4" placeholder="Ваш вопрос или комментарий"></textarea>
+                </label>
+                <button type="submit" class="btn secondary-btn">Отправить</button>
+                <p class="form-status" id="form-status"></p>
+            </form>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <p>© Эко-Маркет, 2025. Учебный проект.</p>
+        <a href="privacy.html" class="footer-link">Политика конфиденциальности</a>
+    </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
