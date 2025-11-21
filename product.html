@@ -1,84 +1,260 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Эко-Маркет — Товар</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script defer src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Эко-Маркет — Карточка товара</title>
+  <meta name="description" content="Карточка товара магазина Эко-Маркет: описание, цена, отзывы и рейтинг."/>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    /* Небольшие локальные стили для отзывов (можно убрать, если всё есть в styles.css) */
+    .product-page { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    .breadcrumbs { font-size: 14px; margin-bottom: 16px; }
+    .product-card { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+    .product-image { width: 100%; height: 320px; background: #f2f4f7; border-radius: 12px; display:flex; align-items:center; justify-content:center; color:#6b7280; }
+    .product-title { font-size: 28px; font-weight: 700; margin: 0 0 12px; }
+    .product-price { font-size: 22px; font-weight: 700; margin: 12px 0; }
+    .btn { display: inline-block; padding: 10px 16px; border-radius: 10px; background:#16a34a; color:#fff; text-decoration:none; border:0; cursor:pointer; }
+    .btn.secondary { background:#2563eb; }
+    .muted { color:#6b7280; }
+
+    .reviews { margin-top: 40px; }
+    .reviews h2 { font-size: 22px; margin-bottom: 10px; }
+    .avg-box { display:flex; align-items:center; gap: 12px; margin-bottom: 18px; }
+    .avg-score { font-size: 28px; font-weight: 700; }
+    .stars { color: #f59e0b; font-size: 18px; line-height: 1; }
+    .reviews-list { display: grid; gap: 14px; margin: 20px 0; }
+    .review-item { border: 1px solid #e5e7eb; border-radius: 12px; padding: 14px; background:#fff; }
+    .review-item .head { display:flex; align-items:center; justify-content:space-between; margin-bottom: 6px; }
+    .review-item .name { font-weight: 700; }
+    .review-item .rating { color: #f59e0b; }
+    .review-item .text { white-space: pre-wrap; }
+
+    .review-form { border: 1px dashed #d1d5db; border-radius: 12px; padding: 16px; background:#fafbfd; }
+    .review-form .row { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .review-form label { font-size: 14px; color:#374151; }
+    .review-form input[type="text"],
+    .review-form select,
+    .review-form textarea {
+      width: 100%; padding: 10px 12px; border:1px solid #d1d5db; border-radius:10px; background:#fff;
+    }
+    .review-form textarea { min-height: 96px; resize: vertical; }
+    .empty { color:#6b7280; }
+  </style>
 </head>
 <body>
-  <header class="container">
-    <a href="index.html" class="logo">Эко-Маркет</a>
-    <nav><a href="catalog.html">Каталог</a> · <a href="cart.html">Корзина</a></nav>
+  <header class="site-header">
+    <div class="container product-page" style="padding-top:16px;">
+      <nav class="breadcrumbs">
+        <a href="index.html">Главная</a> · <a href="catalog.html">Каталог</a> · <span class="muted">Товар</span>
+      </nav>
+    </div>
   </header>
 
-  <main class="container" id="product-page">
+  <main class="product-page">
     <!-- Карточка товара -->
-    <section id="product-card" class="card">
-      <div class="product-gallery">
-        <img id="product-image" alt="Фото товара" />
-      </div>
-      <div class="product-info">
-        <h1 id="product-title"></h1>
-        <p id="product-desc" class="muted"></p>
+    <section class="product-card" id="productCard">
+      <div class="product-image" id="productImage">Изображение товара</div>
 
-        <div class="rating-row">
-          <strong>Средняя оценка:</strong>
-          <span id="avg-rating" class="stars" aria-label="Средняя оценка"></span>
-          <span id="reviews-count" class="muted"></span>
-        </div>
-
-        <div class="price-row">
-          <span id="product-price" class="price"></span>
-          <button id="add-to-cart" class="btn">В корзину</button>
+      <div>
+        <h1 class="product-title" id="productTitle">Название товара</h1>
+        <p class="muted" id="productDesc">Короткое описание экологичного товара. Материалы, свойства, преимущества.</p>
+        <div class="product-price" id="productPrice">2 490 ₽</div>
+        <div style="display:flex; gap:12px; margin-top:10px;">
+          <button class="btn" id="addToCartBtn">В корзину</button>
+          <a class="btn secondary" href="cart.html">Перейти в корзину</a>
         </div>
       </div>
     </section>
 
-    <!-- Форма отзыва -->
-    <section class="card" id="review-form-card">
-      <h2>Оставить отзыв</h2>
-      <form id="review-form">
-        <label class="lbl">Ваша оценка</label>
-        <div class="rating-input" id="rating-input" aria-label="Поставьте оценку от 1 до 5">
-          <button type="button" data-val="1" aria-label="1 звезда">★</button>
-          <button type="button" data-val="2" aria-label="2 звезды">★</button>
-          <button type="button" data-val="3" aria-label="3 звезды">★</button>
-          <button type="button" data-val="4" aria-label="4 звезды">★</button>
-          <button type="button" data-val="5" aria-label="5 звезд">★</button>
-          <input type="hidden" name="rating" id="rating" value="5" />
-        </div>
+    <!-- Блок отзывов -->
+    <section class="reviews" id="reviewsSection">
+      <h2>Отзывы и рейтинг</h2>
+      <div class="avg-box">
+        <div class="avg-score" id="avgRating">0.0</div>
+        <div class="stars" id="avgStars" aria-label="Средний рейтинг по отзывам">☆☆☆☆☆</div>
+        <div class="muted" id="reviewsMeta">(0 отзывов)</div>
+      </div>
 
-        <label class="lbl" for="author">Имя</label>
-        <input id="author" name="author" required placeholder="Например, Анна" />
+      <!-- Список отзывов -->
+      <div class="reviews-list" id="reviewsList">
+        <div class="empty">Пока нет отзывов. Станьте первым!</div>
+      </div>
 
-        <label class="lbl" for="text">Комментарий</label>
-        <textarea id="text" name="text" required placeholder="Что понравилось? Что улучшить?"></textarea>
-
-        <button class="btn" type="submit">Отправить отзыв</button>
-      </form>
-    </section>
-
-    <!-- Список отзывов -->
-    <section class="card" id="reviews-card">
-      <h2>Отзывы</h2>
-      <ul id="reviews-list" class="reviews"></ul>
-      <template id="review-item-tpl">
-        <li class="review-item">
-          <div class="review-head">
-            <strong class="review-author"></strong>
-            <span class="review-stars stars"></span>
+      <!-- Форма отзыва -->
+      <form class="review-form" id="reviewForm">
+        <div class="row">
+          <div>
+            <label for="reviewName">Имя</label>
+            <input type="text" id="reviewName" name="name" placeholder="Ваше имя" required />
           </div>
-          <p class="review-text"></p>
-          <time class="review-date"></time>
-        </li>
-      </template>
+          <div>
+            <label for="reviewRating">Оценка</label>
+            <select id="reviewRating" name="rating" required>
+              <option value="" disabled selected>Выберите…</option>
+              <option value="5">5 — Отлично</option>
+              <option value="4">4 — Хорошо</option>
+              <option value="3">3 — Нормально</option>
+              <option value="2">2 — Плохо</option>
+              <option value="1">1 — Ужасно</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-top:12px;">
+          <label for="reviewText">Отзыв</label>
+          <textarea id="reviewText" name="text" placeholder="Поделитесь опытом…" required></textarea>
+        </div>
+        <div style="margin-top:14px; display:flex; gap:10px;">
+          <button class="btn" type="submit">Оставить отзыв</button>
+          <button class="btn secondary" type="button" id="seedReviewsBtn">Добавить тестовые отзывы</button>
+        </div>
+      </form>
     </section>
   </main>
 
-  <footer class="container muted">
-    © Эко-Маркет, учебный проект
+  <footer class="site-footer">
+    <div class="product-page muted" style="padding-bottom:24px;">
+      © Эко-Маркет. Экотовары для устойчивой жизни.
+    </div>
   </footer>
+
+  <!-- 1) Подключаем УТИЛИТУ -->
+  <script src="js/reviews-utils.js"></script>
+
+  <!-- 2) Твой общий скрипт (если используется). Можно оставить пустым в этом контексте -->
+  <script src="script.js"></script>
+
+  <!-- 3) Небольшая обвязка для страницы товара (без правки script.js) -->
+  <script>
+    (function () {
+      // Берём productId из URL (product.html?id=123). По умолчанию 1.
+      const params = new URLSearchParams(location.search);
+      const productId = params.get('id') || '1';
+
+      // Фиктивные данные товара (если у тебя есть свой источник — можно заменить)
+      const productData = {
+        '1': { title: 'Adventure Quest', price: 1990, desc: 'Кооперативное приключение.', img: 'Adventure Quest' },
+        '2': { title: 'Space Traders', price: 2490, desc: 'Торговля и пиратство в космосе.', img: 'Space Traders' },
+        '3': { title: 'Mystic Forest', price: 2290, desc: 'Исследуйте таинственный лес.', img: 'Mystic Forest' }
+      };
+      const p = productData[productId] || productData['1'];
+
+      // Рендер карточки
+      document.getElementById('productTitle').textContent = p.title;
+      document.getElementById('productDesc').textContent = p.desc;
+      document.getElementById('productPrice').textContent = new Intl.NumberFormat('ru-RU').format(p.price) + ' ₽';
+      document.getElementById('productImage').textContent = p.img;
+
+      // Корзина (простой пример)
+      document.getElementById('addToCartBtn').addEventListener('click', () => {
+        alert('Добавлено в корзину: ' + p.title);
+      });
+
+      // Хранилище отзывов: localStorage ключ per-product
+      const LS_KEY = 'eco-reviews::' + productId;
+
+      function loadReviews() {
+        try {
+          const raw = localStorage.getItem(LS_KEY);
+          return raw ? JSON.parse(raw) : [];
+        } catch (e) {
+          return [];
+        }
+      }
+      function saveReviews(list) {
+        localStorage.setItem(LS_KEY, JSON.stringify(list));
+      }
+
+      // Рендер звёзд из рейтинга (0..5)
+      function starsFromRating(val) {
+        const n = Math.round(val);
+        return '★★★★★☆☆☆☆☆'.slice(5 - n, 10 - n);
+      }
+
+      // Обновить UI списка и среднего рейтинга
+      function renderReviews() {
+        const list = loadReviews();
+        const listBox = document.getElementById('reviewsList');
+        listBox.innerHTML = '';
+
+        if (list.length === 0) {
+          listBox.innerHTML = '<div class="empty">Пока нет отзывов. Станьте первым!</div>';
+        } else {
+          list.forEach(r => {
+            const item = document.createElement('div');
+            item.className = 'review-item';
+            item.innerHTML = `
+              <div class="head">
+                <div class="name">${escapeHtml(r.name)}</div>
+                <div class="rating" aria-label="Оценка">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>
+              </div>
+              <div class="text">${escapeHtml(r.text)}</div>
+            `;
+            listBox.appendChild(item);
+          });
+        }
+
+        // Средний рейтинг
+        const avg = (window.ReviewUtils && ReviewUtils.calculateAverageRating)
+          ? ReviewUtils.calculateAverageRating(list.map(r => r.rating))
+          : 0;
+
+        document.getElementById('avgRating').textContent = avg.toFixed(1);
+        document.getElementById('avgStars').textContent = starsFromRating(avg);
+        document.getElementById('reviewsMeta').textContent = `(${list.length} ${declOfNum(list.length, ['отзыв', 'отзыва', 'отзывов'])})`;
+      }
+
+      // Форма добавления
+      const form = document.getElementById('reviewForm');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('reviewName').value.trim();
+        const rating = Number(document.getElementById('reviewRating').value);
+        const text = document.getElementById('reviewText').value.trim();
+
+        // Валидация через ReviewUtils
+        const valid = (window.ReviewUtils && ReviewUtils.validateReview)
+          ? ReviewUtils.validateReview({ name, rating, text })
+          : { ok: true };
+
+        if (!valid.ok) {
+          alert('Ошибка: ' + (valid.error || 'проверьте поля'));
+          return;
+        }
+
+        const list = loadReviews();
+        list.unshift({ name, rating, text, ts: Date.now() });
+        saveReviews(list);
+        form.reset();
+        renderReviews();
+      });
+
+      // Кнопка "досеять" тестовые отзывы (для скринов/демо)
+      document.getElementById('seedReviewsBtn').addEventListener('click', () => {
+        const seeded = [
+          { name: 'Ира', rating: 5, text: 'Очень понравилось! Советую всем.', ts: Date.now() - 50000 },
+          { name: 'Павел', rating: 4, text: 'Хорошее качество, но хотелось бы подешевле.', ts: Date.now() - 40000 },
+          { name: 'Оля', rating: 3, text: 'Нормально, без восторга.', ts: Date.now() - 30000 }
+        ];
+        saveReviews(seeded);
+        renderReviews();
+      });
+
+      // Вспомогательное
+      function escapeHtml(s) {
+        return String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+      }
+      function declOfNum(n, forms) {
+        // 1 отзыв, 2-4 отзыва, 5+ отзывов
+        const n10 = n % 10, n100 = n % 100;
+        if (n10 === 1 && n100 !== 11) return forms[0];
+        if (n10 >= 2 && n10 <= 4 && (n100 < 10 || n100 >= 20)) return forms[1];
+        return forms[2];
+      }
+
+      // Первый рендер
+      renderReviews();
+    })();
+  </script>
 </body>
 </html>
