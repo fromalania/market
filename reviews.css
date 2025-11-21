@@ -1,0 +1,22 @@
+/* Минимальные стили для блока отзывов (изолированы от styles.css) */
+
+.reviews { margin-top: 32px; padding-top: 16px; border-top: 1px solid #eee; }
+.reviews h2 { margin-bottom: 12px; font-size: 1.6rem; }
+
+.reviews__list { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 12px; }
+.reviews__item { padding: 12px 14px; border: 1px solid #e5e5e5; border-radius: 10px; background: #fff; }
+.reviews__head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.reviews__name { font-weight: 600; }
+.reviews__rating { color: #ffb400; font-size: 14px; letter-spacing: .5px; }
+.reviews__text { line-height: 1.5; margin: 6px 0 8px; }
+.reviews__date { color: #999; font-size: 12px; }
+
+.reviews__form .form-row { display: grid; gap: 6px; margin-bottom: 10px; }
+.reviews__form input,
+.reviews__form select,
+.reviews__form textarea { width: 100%; padding: 10px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font: inherit; }
+.reviews__success { color: #1a7f37; margin-top: 8px; }
+
+.btn { cursor: pointer; }
+.btn--primary { background: #1a7f37; color: #fff; padding: 10px 16px; border: 0; border-radius: 8px; }
+.btn--primary:hover { background: #14602b; }
