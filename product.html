@@ -1,89 +1,86 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Карточка товара — Эко-Маркет</title>
-    <meta name="description" content="Пример страницы товара для учебной практики по SEO и юзабилити.">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Эко-Маркет — Карточка товара</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="reviews.css"/><!-- стили отзывов -->
 </head>
-<body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <a href="index.html" class="logo">Эко-Маркет</a>
-            <nav class="main-nav">
-                <a href="index.html" class="nav-link">Главная</a>
-                <a href="catalog.html" class="nav-link">Каталог</a>
-                <a href="cart.html" class="nav-link">Корзина</a>
-                <a href="index.html#contacts" class="nav-link">Контакты</a>
-            </nav>
-            <a href="cart.html" class="cart-link">Корзина <span class="cart-count" id="cart-count">0</span></a>
+<!-- Для аналитики удобно класть данные в data-* -->
+<body data-product-id="SKU-001" data-product-name="Eco Bottle 1L" data-product-price="1290">
+  <header class="container">
+    <nav class="nav">
+      <a class="logo" href="index.html">Эко-Маркет</a>
+      <div class="nav-links">
+        <a href="catalog.html">Каталог</a>
+        <a href="cart.html">Корзина</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="product" data-product-id="SKU-001" data-product-name="Eco Bottle 1L" data-product-price="1290">
+      <div class="product__media">
+        <img src="https://placehold.co/600x400?text=Eco+Bottle+1L" alt="Eco Bottle 1L" />
+      </div>
+
+      <div class="product__info">
+        <h1>Eco Bottle 1L</h1>
+        <p class="product__price">1 290 ₽</p>
+        <p class="product__desc">
+          Многоразовая бутылка из переработанного пластика. Подходит для воды и прохладительных напитков.
+        </p>
+
+        <button class="btn btn--primary" data-action="add-to-cart">В корзину</button>
+      </div>
+    </section>
+
+    <!-- REVIEWS: блок отзывов (готов к работе сразу) -->
+    <section id="reviews" class="reviews">
+      <h2>Отзывы</h2>
+
+      <!-- список уже оставленных отзывов -->
+      <ul id="reviewsList" class="reviews__list"></ul>
+
+      <!-- форма добавления отзыва -->
+      <form id="reviewForm" class="reviews__form">
+        <div class="form-row">
+          <label for="reviewName">Ваше имя</label>
+          <input id="reviewName" name="name" type="text" placeholder="Иван" required>
         </div>
-    </header>
 
-    <main>
-        <section class="page-header">
-            <div class="container">
-                <h1>Многоразовая бутылка «Forest» 500&nbsp;мл</h1>
-                <p>Эта страница сделана специально для анализа юзабилити и SEO. Здесь можно тренироваться улучшать описание, блоки и структуру.</p>
-            </div>
-        </section>
-
-        <section class="product-detail">
-            <div class="container product-detail-inner">
-                <div class="product-media">
-                    <div class="product-image-placeholder">
-                        Изображение товара (заглушка)
-                    </div>
-                </div>
-                <div class="product-info">
-                    <h2 id="product-name">Многоразовая бутылка «Forest» 500 мл</h2>
-                    <p class="product-price" id="product-price">990 ₽</p>
-                    <p class="product-short" id="product-short">
-                        Удобная стальная бутылка для воды и других напитков. Хороший вариант, чтобы отказаться от одноразового пластика.
-                    </p>
-
-                    <div class="product-buy-block">
-                        <button class="btn primary-btn" id="add-to-cart-detail" data-product="bottle">Добавить в корзину</button>
-                        <p class="stock">В наличии: <span id="stock">Есть</span></p>
-                    </div>
-
-                    <div class="product-meta">
-                        <h3>Краткие характеристики</h3>
-                        <ul>
-                            <li>Объём: 500 мл</li>
-                            <li>Материал: нержавеющая сталь</li>
-                            <li>Подходит для горячих и холодных напитков</li>
-                            <li>Можно мыть вручную, посудомойка — по инструкции</li>
-                        </ul>
-                    </div>
-
-                    <div class="product-delivery">
-                        <h3>Доставка и оплата (пример блока)</h3>
-                        <p>Доставка по России от 3 до 7 дней. Оплата онлайн банковской картой или при получении (зависит от службы доставки).</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-light">
-            <div class="container">
-                <h2>Описание товара (учебный текст)</h2>
-                <p>
-                    Здесь может быть подробное описание товара: для кого он подходит, как им пользоваться, как его утилизировать, чем он лучше одноразовых аналогов.
-                    На практике сюда стоит добавить больше конкретики, списки, примеры сценариев использования и ответы на частые вопросы.
-                </p>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container footer-inner">
-            <p>© Эко-Маркет, 2025. Учебный проект.</p>
-            <a href="privacy.html" class="footer-link">Политика конфиденциальности</a>
+        <div class="form-row">
+          <label for="reviewRating">Оценка</label>
+          <select id="reviewRating" name="rating" required>
+            <option value="" disabled selected>Выберите…</option>
+            <option value="5">★★★★★ (5)</option>
+            <option value="4">★★★★☆ (4)</option>
+            <option value="3">★★★☆☆ (3)</option>
+            <option value="2">★★☆☆☆ (2)</option>
+            <option value="1">★☆☆☆☆ (1)</option>
+          </select>
         </div>
-    </footer>
 
-    <script src="script.js"></script>
+        <div class="form-row">
+          <label for="reviewText">Отзыв</label>
+          <textarea id="reviewText" name="text" rows="4" placeholder="Коротко расскажите о товаре…" required></textarea>
+        </div>
+
+        <button type="submit" class="btn">Отправить отзыв</button>
+        <p id="reviewSuccess" class="reviews__success" hidden>Спасибо! Отзыв отправлен.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <p>© Эко-Маркет, 2025</p>
+  </footer>
+
+  <!-- dataLayer для GTM/GA4 (если GTM вставлен через другой файл — не мешает) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  </script>
+  <script src="script.js"></script>
 </body>
 </html>
