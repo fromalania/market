@@ -1,139 +1,155 @@
-/* =========================================================
-   Эко-Маркет — общий скрипт (карточка товара, отзывы, события)
-   Полная замена содержимого файла.
-   ========================================================= */
+/* ======= Данные (демо) ======= */
+const PRODUCTS = [
+  {
+    id: 1,
+    title: "Бамбуковая щётка",
+    desc: "Экологичная зубная щётка из бамбука.",
+    price: 199,
+    image: "https://picsum.photos/seed/bamboo/720/480"
+  },
+  {
+    id: 2,
+    title: "Эко-бутылка",
+    desc: "Многоразовая бутылка из стекла 0.7 л.",
+    price: 990,
+    image: "https://picsum.photos/seed/bottle/720/480"
+  },
+  {
+    id: 3,
+    title: "Авоська",
+    desc: "Хлопковая сумка-сетка для покупок.",
+    price: 350,
+    image: "https://picsum.photos/seed/bag/720/480"
+  }
+];
 
-/* ---------- Вспомогательное ----------- */
-window.dataLayer = window.dataLayer || [];
+/* ======= Утилиты ======= */
+const qs  = (sel, ctx = document) => ctx.querySelector(sel);
+const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+const fmt = n => n.toLocaleString("ru-RU");
 
-function getProductId() {
-  const url = new URL(window.location.href);
-  // поддержим вариант product.html?id=123
-  return url.searchParams.get('id') || document.body.dataset.productId || 'no-id';
-}
-function getProductName() {
-  return document.body.dataset.productName || (document.querySelector('h1')?.textContent?.trim()) || 'unknown';
-}
-function getProductPrice() {
-  const raw = document.body.dataset.productPrice || '';
-  const n = Number(raw);
-  return Number.isFinite(n) ? n : null;
-}
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-}
-
-/* ---------- Событие add_to_cart ---------- */
-(function trackAddToCart() {
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-add-to-cart], .add-to-cart, .btn-to-cart, .btn[data-action="add-to-cart"]');
-    if (!btn) return;
-
-    // Берём данные товара из ближайшего контейнера, иначе из <body>
-    const container = btn.closest('[data-product-id]') || document.body;
-
-    const product_id   = container.dataset.productId   || getProductId();
-    const product_name = container.dataset.productName || getProductName();
-    const price        = Number(container.dataset.productPrice || getProductPrice() || 0) || null;
-
-    // Пушим в dataLayer — GTM подхватит
-    window.dataLayer.push({
-      event: 'add_to_cart',
-      product_id,
-      product_name,
-      price
-    });
-
-    // Небольшой UX
-    try {
-      if (product_name) alert(`Добавлено в корзину: ${product_name}`);
-    } catch (_) {}
-  });
-})();
-
-/* ---------- Отзывы: хранение в localStorage ---------- */
-function reviewsKey() {
-  return `reviews_${getProductId()}`;
-}
+/* ======= Локальное хранилище отзывов ======= */
+const STORAGE_KEY = "eco-reviews";
 function loadReviews() {
-  try { return JSON.parse(localStorage.getItem(reviewsKey())) || []; }
-  catch { return []; }
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+  } catch { return {}; }
 }
-function saveReviews(list) {
-  localStorage.setItem(reviewsKey(), JSON.stringify(list));
+function saveReviews(db) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
 }
 
-function renderReviews() {
-  const ul = document.getElementById('reviewsList');
-  if (!ul) return;
+/* ======= Страница товара ======= */
+document.addEventListener("DOMContentLoaded", () => {
+  const page = qs("#product-page");
+  if (!page) return;
 
-  const list = loadReviews();
-  ul.innerHTML = '';
+  // берем id из URL (?id=1). если нет — берём 1
+  const url = new URL(location.href);
+  const id  = Number(url.searchParams.get("id") || 1);
 
-  if (!list.length) {
-    ul.innerHTML = '<li class="reviews__empty">Пока нет отзывов — станьте первым!</li>';
-    return;
+  const product = PRODUCTS.find(p => p.id === id) || PRODUCTS[0];
+
+  // Заполняем карточку
+  qs("#product-image").src       = product.image;
+  qs("#product-image").alt       = product.title;
+  qs("#product-title").textContent = product.title;
+  qs("#product-desc").textContent  = product.desc;
+  qs("#product-price").textContent = fmt(product.price) + " ₽";
+
+  // Корзина (демо)
+  qs("#add-to-cart").addEventListener("click", () => {
+    alert("Добавлено в корзину: " + product.title);
+  });
+
+  // Рейтинг + отзывы
+  const db = loadReviews();
+  if (!db[id]) db[id] = []; // массив отзывов этого товара
+
+  renderReviews(db[id]);
+  renderAvg(db[id]);
+
+  // Выбор рейтинга в форме
+  const ratingButtons = qsa("#rating-input button");
+  const ratingInput   = qs("#rating");
+  function setActive(val) {
+    ratingButtons.forEach(btn => {
+      btn.classList.toggle("active", Number(btn.dataset.val) <= val);
+    });
+  }
+  ratingButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const val = Number(btn.dataset.val);
+      ratingInput.value = val;
+      setActive(val);
+    });
+  });
+  setActive(Number(ratingInput.value));
+
+  // Отправка формы
+  qs("#review-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const author = qs("#author").value.trim();
+    const text   = qs("#text").value.trim();
+    const rating = Number(qs("#rating").value);
+
+    if (!author || !text || rating < 1 || rating > 5) {
+      alert("Проверьте корректность полей.");
+      return;
+    }
+
+    const review = {
+      author,
+      text,
+      rating,
+      date: new Date().toISOString()
+    };
+    db[id].unshift(review);
+    saveReviews(db);
+
+    // очистить форму, перерисовать блоки
+    e.target.reset();
+    ratingInput.value = 5;
+    setActive(5);
+    renderReviews(db[id]);
+    renderAvg(db[id]);
+    alert("Спасибо! Ваш отзыв добавлен.");
+  });
+
+  function renderAvg(list) {
+    const avg = list.length
+      ? (list.reduce((s, r) => s + r.rating, 0) / list.length)
+      : 0;
+    // звёздочки
+    qs("#avg-rating").innerHTML = stars(avg);
+    // счётчик
+    qs("#reviews-count").textContent =
+      list.length ? `(${list.length} отзыва)` : "(отзывов пока нет)";
   }
 
-  list.forEach(r => {
-    const li = document.createElement('li');
-    li.className = 'reviews__item';
-    li.innerHTML = `
-      <div class="reviews__head">
-        <strong class="reviews__name">${escapeHtml(r.name)}</strong>
-        <span class="reviews__rating">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
-      </div>
-      <div class="reviews__text">${escapeHtml(r.text)}</div>
-      <time class="reviews__date" datetime="${new Date(r.ts).toISOString()}">
-        ${new Date(r.ts).toLocaleDateString()}
-      </time>
-    `;
-    ul.appendChild(li);
-  });
-}
-
-function initReviewForm() {
-  const form = document.getElementById('reviewForm');
-  const ok = document.getElementById('reviewSuccess');
-  if (!form) return;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const name = form.name.value.trim();
-    const rating = Number(form.rating.value);
-    const text = form.text.value.trim();
-
-    if (!name || !rating || !text) return;
-
-    const reviews = loadReviews();
-    reviews.unshift({ name, rating, text, ts: Date.now() }); // новый — наверх
-    saveReviews(reviews);
-    renderReviews();
-
-    form.reset();
-    if (ok) { ok.hidden = false; setTimeout(() => ok.hidden = true, 3000); }
-
-    // GA4/GTM событие — можно отлавливать в Tag Assistant
-    window.dataLayer.push({
-      event: 'review_submitted',
-      product_id: getProductId(),
-      rating: rating,
-      source: 'onsite'
+  function renderReviews(list) {
+    const ul = qs("#reviews-list");
+    ul.innerHTML = "";
+    const tpl = qs("#review-item-tpl").content;
+    list.forEach(r => {
+      const li = tpl.cloneNode(true);
+      qs(".review-author", li).textContent = r.author;
+      qs(".review-text", li).textContent   = r.text;
+      qs(".review-stars", li).innerHTML    = stars(r.rating);
+      qs(".review-date", li).textContent   = new Date(r.date)
+        .toLocaleDateString("ru-RU");
+      ul.appendChild(li);
     });
-  });
-}
+    if (!list.length) {
+      ul.innerHTML = `<li class="muted">Пока нет отзывов — будьте первым!</li>`;
+    }
+  }
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderReviews();
-  initReviewForm();
-});
-
-/* ---------- (Опционально) событие клика по фильтрам каталога ----------
-   Если на catalog.html у кнопок/ссылок есть data-filter="price_asc" и т.п.,
-   этот блок зафиксирует клики. Ничего не ломает на других страницах. */
-document.addEventListener('click', (e) => {
-  const f = e.target.closest('[data-filter]');
-  if (!f) return;
-  window.dataLayer.push({ event: 'filter_click', filter: f.dataset.filter });
+  function stars(value) {
+    // value может быть дробным (например, 4.3)
+    const full = Math.floor(value);
+    const half = value - full >= 0.5 ? 1 : 0;
+    const empty = 5 - full - half;
+    return "★".repeat(full) + (half ? "☆" : "") + "☆".repeat(empty - (half ? 0 : 0));
+  }
 });
