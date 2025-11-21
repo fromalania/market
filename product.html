@@ -3,160 +3,82 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Эко-Маркет — Карточка товара</title>
-
-  <!-- Базовые стили сайта -->
+  <title>Эко-Маркет — Товар</title>
   <link rel="stylesheet" href="styles.css" />
-
-  <style>
-    /* Небольшие стили для отзывов (можно перенести в styles.css) */
-    .product-page { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
-    .breadcrumbs { font-size: 14px; margin-bottom: 12px; color: #666; }
-    .product-header { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .product-media { background: #f3f6f8; border-radius: 12px; height: 360px; display: flex; align-items: center; justify-content: center; color: #888; }
-    .product-title { font-size: 28px; margin: 0 0 8px; }
-    .product-price { font-size: 22px; margin: 6px 0 14px; }
-    .product-actions { display: flex; gap: 12px; align-items: center; }
-    .btn { background: #0c8; color: #fff; border: 0; padding: 12px 18px; border-radius: 10px; cursor: pointer; font-weight: 600; }
-    .btn.secondary { background: #0aa; }
-    .product-rating { margin: 10px 0 6px; font-size: 16px; }
-    .product-meta { margin-top: 16px; color: #666; line-height: 1.5; }
-
-    .hr { border: 0; height: 1px; background: #eceff3; margin: 28px 0; }
-
-    .reviews { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .reviews h2 { margin: 0 0 10px; font-size: 22px; }
-    .review-form label { display: block; margin: 10px 0 6px; font-weight: 600; }
-    .review-form select, .review-form textarea { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #dfe6ee; outline: 0; }
-    .review-form textarea { min-height: 110px; resize: vertical; }
-    .reviews-list { display: grid; gap: 12px; }
-    .review-item { border: 1px solid #e7edf3; border-radius: 12px; padding: 12px 14px; background: #fafcff; }
-    .review-rating { color: #0a7; margin-bottom: 4px; }
-    .review-date { color: #7b8896; font-size: 13px; margin-top: 6px; }
-    @media (max-width: 860px) {
-      .product-header { grid-template-columns: 1fr; }
-      .reviews { grid-template-columns: 1fr; }
-    }
-  </style>
+  <script defer src="script.js"></script>
 </head>
-
 <body>
-  <header class="site-header" style="padding: 14px 16px; border-bottom: 1px solid #eceff3;">
-    <nav class="container" style="max-width:1100px;margin:0 auto;display:flex;gap:18px;align-items:center;">
-      <a href="index.html">Главная</a>
-      <a href="catalog.html">Каталог</a>
-      <a href="cart.html">Корзина</a>
-    </nav>
+  <header class="container">
+    <a href="index.html" class="logo">Эко-Маркет</a>
+    <nav><a href="catalog.html">Каталог</a> · <a href="cart.html">Корзина</a></nav>
   </header>
 
-  <main class="product-page">
-    <div class="breadcrumbs">
-      <a href="index.html">Главная</a> · <a href="catalog.html">Каталог</a> · Товар
-    </div>
-
-    <section class="product-header">
-      <div class="product-media">
-        Изображение товара
+  <main class="container" id="product-page">
+    <!-- Карточка товара -->
+    <section id="product-card" class="card">
+      <div class="product-gallery">
+        <img id="product-image" alt="Фото товара" />
       </div>
+      <div class="product-info">
+        <h1 id="product-title"></h1>
+        <p id="product-desc" class="muted"></p>
 
-      <div>
-        <h1 class="product-title">Space Traders</h1>
-        <div class="product-price">2 490 ₽</div>
-
-        <!-- Блок средней оценки -->
-        <div class="product-rating">
-          Средняя оценка: <b data-rating-target="space-traders">0.0</b> / 5
+        <div class="rating-row">
+          <strong>Средняя оценка:</strong>
+          <span id="avg-rating" class="stars" aria-label="Средняя оценка"></span>
+          <span id="reviews-count" class="muted"></span>
         </div>
 
-        <div class="product-actions">
-          <button class="btn" id="add-to-cart">В корзину</button>
-          <a class="btn secondary" href="checkout.html">Купить сейчас</a>
-        </div>
-
-        <div class="product-meta">
-          Торговля и пиратство в космосе. Стратегическая настольная игра с глубокими механиками
-          и реиграбельностью. Содержит экологичные материалы и переработанную упаковку.
+        <div class="price-row">
+          <span id="product-price" class="price"></span>
+          <button id="add-to-cart" class="btn">В корзину</button>
         </div>
       </div>
     </section>
 
-    <hr class="hr" />
-
-    <section class="reviews">
-      <div>
-        <h2>Оставить отзыв</h2>
-        <form id="review-form" class="review-form">
-          <label>Оценка</label>
-          <select name="rating" required>
-            <option value="">Выберите…</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-
-          <label>Комментарий</label>
-          <textarea name="comment" placeholder="Что понравилось? Что можно улучшить?"></textarea>
-
-          <div style="margin-top:12px;">
-            <button type="submit" class="btn">Оставить отзыв</button>
-          </div>
-        </form>
-      </div>
-
-      <div>
-        <h2>Отзывы</h2>
-        <div class="reviews-list" data-reviews-list>
-          <!-- сюда будут подставляться отзывы -->
+    <!-- Форма отзыва -->
+    <section class="card" id="review-form-card">
+      <h2>Оставить отзыв</h2>
+      <form id="review-form">
+        <label class="lbl">Ваша оценка</label>
+        <div class="rating-input" id="rating-input" aria-label="Поставьте оценку от 1 до 5">
+          <button type="button" data-val="1" aria-label="1 звезда">★</button>
+          <button type="button" data-val="2" aria-label="2 звезды">★</button>
+          <button type="button" data-val="3" aria-label="3 звезды">★</button>
+          <button type="button" data-val="4" aria-label="4 звезды">★</button>
+          <button type="button" data-val="5" aria-label="5 звезд">★</button>
+          <input type="hidden" name="rating" id="rating" value="5" />
         </div>
-      </div>
+
+        <label class="lbl" for="author">Имя</label>
+        <input id="author" name="author" required placeholder="Например, Анна" />
+
+        <label class="lbl" for="text">Комментарий</label>
+        <textarea id="text" name="text" required placeholder="Что понравилось? Что улучшить?"></textarea>
+
+        <button class="btn" type="submit">Отправить отзыв</button>
+      </form>
+    </section>
+
+    <!-- Список отзывов -->
+    <section class="card" id="reviews-card">
+      <h2>Отзывы</h2>
+      <ul id="reviews-list" class="reviews"></ul>
+      <template id="review-item-tpl">
+        <li class="review-item">
+          <div class="review-head">
+            <strong class="review-author"></strong>
+            <span class="review-stars stars"></span>
+          </div>
+          <p class="review-text"></p>
+          <time class="review-date"></time>
+        </li>
+      </template>
     </section>
   </main>
 
-  <footer style="margin-top:32px;padding:16px;border-top:1px solid #eceff3;text-align:center;color:#768395;">
-    © Эко-Маркет настольных игр
+  <footer class="container muted">
+    © Эко-Маркет, учебный проект
   </footer>
-
-  <!-- Скрипты сайта -->
-  <script src="script.js"></script>
-
-  <!-- Модуль отзывов -->
-  <script type="module">
-    import { initProductReviewsUI, addReview } from './reviews.js';
-
-    // Если у тебя другой ID товара — замени на свой slug/ID
-    const PRODUCT_ID = 'space-traders';
-
-    // Отрисовываем начальное состояние отзывов/средней оценки
-    initProductReviewsUI(PRODUCT_ID);
-
-    // Обработка формы отзыва
-    document.addEventListener('submit', (e) => {
-      const form = e.target.closest('#review-form');
-      if (!form) return;
-
-      e.preventDefault();
-
-      const rating = form.querySelector('select[name="rating"]').value;
-      const comment = form.querySelector('textarea[name="comment"]').value;
-
-      const avg = addReview(PRODUCT_ID, rating, comment);
-
-      form.reset();
-      initProductReviewsUI(PRODUCT_ID);
-
-      alert(`Отзыв сохранён! Текущая средняя оценка: ${avg}`);
-    });
-
-    // Пример обработчика для кнопки «В корзину», если script.js не делает этого сам
-    const btn = document.getElementById('add-to-cart');
-    if (btn) {
-      btn.addEventListener('click', () => {
-        alert('Товар добавлен в корзину');
-        // здесь можно вызвать вашу addToCart(...) из script.js, если она у вас есть
-      });
-    }
-  </script>
 </body>
 </html>
